@@ -51,4 +51,10 @@ describe.runIf(RUN)("integration against standalone server", () => {
     expect(html).toContain("About");
     expect(html).toContain("open-source PaaS for hardware you own");
   });
+
+  it("/health returns 200 ok", async () => {
+    const r = await fetch(`${base}/health`);
+    expect(r.status).toBe(200);
+    expect(await r.text()).toBe("ok\n");
+  });
 });
